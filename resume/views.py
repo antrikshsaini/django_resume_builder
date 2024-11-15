@@ -12,13 +12,15 @@ class ResumeView(APIView):
     authentication_classes = [CustomAuthentication]
 
     def post(self, request):
+        # print("Request data:", request.data)  # Log incoming data
         request.data['created_by'] = request.user.id
         serializer = ResumeSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(created_by=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        # print("Serializer errors:", serializer.errors)  # Log serializer errors
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+     
     def get(self, request, id=None):
         if id:
             resume = get_object_or_404(Resume, id=id)

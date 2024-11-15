@@ -4,6 +4,7 @@ from django.conf import settings
 from authentication.models import User
 from rest_framework.authentication import BaseAuthentication
 from rest_framework.exceptions import AuthenticationFailed
+import secrets
 
 class CustomAuthentication(BaseAuthentication):
     """
@@ -36,6 +37,15 @@ class CustomAuthentication(BaseAuthentication):
             raise AuthenticationFailed('Token has expired')
         except jwt.InvalidTokenError:
             raise AuthenticationFailed('Invalid token')
+
+    def generate_reset_token(self, user):
+        """
+        Generates a secure random reset token and assigns it to the user.
+        """
+        reset_token = secrets.token_urlsafe(32)
+        user.reset_token = reset_token
+        user.save()
+        return reset_token
 
     def authenticate(self, request):
         """
