@@ -56,3 +56,8 @@ docker-compose down
 `docker tag django_resume_builder-backend antrikshsaini/django_resume_builder-backend:latest`
 
 `docker push antrikshsaini/django_resume_builder-backend:latest`
+
+## CI/CD pipeline
+
+Github Action CI/CD pipeline is added
+Deployed code on Docker Hub
