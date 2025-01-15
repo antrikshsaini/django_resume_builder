@@ -21,5 +21,13 @@ jobs:
         run: sudo docker rm -f django_resume_builder-backend-container || true
       
       - name: Run Docker Container
-        run: sudo docker run -d -p 8080:8080 --name django_resume_builder-backend-container antrikshsaini/django_resume_builder-backend
+        run: sudo docker run -d -p 8080:8000 --name django_resume_builder-backend-container antrikshsaini/django_resume_builder-backend
+       
+      - name: Check Docker Service
+        run: sudo systemctl status docker
 
+      - name: List Running Docker Containers
+        run: sudo docker ps -a
+
+      - name: Check Docker Container Logs
+        run: sudo docker logs django_resume_builder-backend-container
