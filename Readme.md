@@ -61,3 +61,43 @@ docker-compose down
 
 Github Action CI/CD pipeline is added
 Deployed code on Docker Hub
+
+## Steps to create CI/CD pipeline
+
+Go to Actions on Github
+create Docker Image
+create .github/workflows/ci.yml
+
+ci.yml will contain CI until Bulid phase
+
+### Deployment Phase
+
+create EC2 instance on AWS
+Run AWS instance
+
+Create Github action Runners for CD Pipeline
+Go to Runners on settings of Github Repository
+
+Create New Runner
+Select Linux
+
+Run all the commands on linux EC2 instance
+First update EC2 instance by runnning "sudo apt update"
+"sudo apt-get upgrade -y"
+
+After running all commands written on Download part
+
+Run all configure commands
+
+to run on ec2 instance
+./run.sh
+
+#### Use this YAML in your workflow file for each job
+
+runs-on: self-hosted
+
+### Install Docker on EC2 instance
+
+Use ubuntu docs to install docker
+
+"sudo docker ps" to check if docker is install properly

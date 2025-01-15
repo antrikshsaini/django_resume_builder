@@ -1,0 +1,24 @@
+name: Django CD Pipeline
+
+on:
+  workflow_run:
+    workflows: ["Django CI Pipeline"]
+    types:
+      - completed
+
+jobs:
+
+  build:
+
+    runs-on: self-hosted
+
+    steps:
+
+      - name: Pull Docker image
+        run: sudo docker pull antrikshsaini/django_resume_builder-backend:latest
+
+      - name: Delete Old docker container
+        run: sudo docker rm -f django_resume_builder-backend-container || true
+      
+      - name: Run Docker Container
+        run: sudo docker run -d -p 8080:8080 --name django_resume_builder-backend-container antrikshsaini/django_resume_builder-backend
