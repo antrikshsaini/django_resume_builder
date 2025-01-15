@@ -19,7 +19,7 @@ ENV PYTHONUNBUFFERED 1
 # Expose the port the app runs on
 EXPOSE 8000
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
 # Command to start the Django server with Gunicorn for Production
-# CMD ["gunicorn", "django_resume_builder.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "django_resume_builder.wsgi:application", "--bind", "0.0.0.0:8000"]
