@@ -22,3 +22,4 @@ jobs:
       
       - name: Run Docker Container
         run: sudo docker run -d -p 8080:8080 --name django_resume_builder-backend-container antrikshsaini/django_resume_builder-backend
+
