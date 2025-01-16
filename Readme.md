@@ -49,6 +49,10 @@ create environment to run docker-compose and docker commands
 
 docker-compose down
 
+### to delete all images from system
+
+docker system prune
+
 ## How to Push Code on Docker Hub Cloud
 
 `docker login`
