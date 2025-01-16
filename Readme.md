@@ -105,3 +105,23 @@ runs-on: self-hosted
 Use ubuntu docs to install docker
 
 "sudo docker ps" to check if docker is install properly
+
+### run nginx for reverse proxy, to direct request on port 80 to 8000
+
+on system install
+sudo apt install nginx
+
+get container ip address
+
+docker inspect \
+ -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name_or_id
+
+cd /etc/nginx/sites-available/
+
+nano default
+
+add in location
+
+proxy_pass http://privat-ip address:8000;
+
+systemctl restart nginx
