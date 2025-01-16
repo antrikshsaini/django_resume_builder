@@ -100,7 +100,8 @@ DATABASES = {
             'password': config('DB_PASSWORD'),
             'retryWrites': True,
             'ssl': True,
-        }
+        },
+        'PORT': config('DB_PORT', default=27017),
     }
 }
 

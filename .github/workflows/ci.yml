@@ -51,7 +51,7 @@ jobs:
 
       - name: Build and push Docker image
         env:
-          IMAGE_NAME: antrikshsaini/django_resume_builder-backend
+          IMAGE_NAME: antrikshsaini/django_resume_builder-backend:latest
         run: |
           docker build -t $IMAGE_NAME .
-          docker push $IMAGE_NAME:latest
+          docker push $IMAGE_NAME
