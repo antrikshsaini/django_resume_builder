@@ -10,7 +10,7 @@ from django.urls import reverse
 from django.core.mail import send_mail
 # from .models import User
 from authentication.models import User
-from .serializers import UserSerializer
+from .serializers import UserSerializer, UserUpdateSerializer
 from .authentication import CustomAuthentication
 import logging
 
@@ -45,19 +45,23 @@ class UserDetailView(APIView):
     authentication_classes = [CustomAuthentication]
     permission_classes = [IsAuthenticated]
 
-    def get(self, request, id):
-        # The `request.user` will be set by the custom authentication class if the user is authenticated
-        user = get_object_or_404(User, id=id)
-        serializer = UserSerializer(user)
-        return Response(serializer.data)
-
-    def put(self, request, id):
-        user = get_object_or_404(User, id=id)
-        serializer = UserSerializer(user, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
+    def get(self, request):
+        # The `request.user` will be set by the custom authentication class
+        if request.user:
+            serializer = UserSerializer(request.user)
             return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({"error": "User not authenticated."}, status=status.HTTP_401_UNAUTHORIZED)
+
+    def put(self, request):
+        if request.user:
+            serializer = UserUpdateSerializer(request.user, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({"error": "User not authenticated."}, status=status.HTTP_401_UNAUTHORIZED)
 
 
 class ForgotPasswordView(APIView):

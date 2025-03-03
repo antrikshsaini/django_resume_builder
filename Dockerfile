@@ -23,3 +23,7 @@ EXPOSE 8000
 
 # Command to start the Django server with Gunicorn for Production
 CMD ["gunicorn", "django_resume_builder.wsgi:application", "--bind", "0.0.0.0:8000"]
+
+# # For logs
+# CMD ["gunicorn", "--log-level", "debug", "--access-logfile", "-", "django_resume_builder.wsgi:application", "--bind", "0.0.0.0:8000"]
+
