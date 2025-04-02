@@ -88,13 +88,62 @@ This repository contains the backend component of a full-stack resume builder ap
 
     * Body: `{ "first_name": "John", "last_name": "Doe", "email": "john.doe@example.com", "password": "securepassword123" }`
 * **Login:** `POST /api/auth/login/`
-* **Get User by ID:** `GET /api/users/{user_id}/`
-* **Update User:** `PUT /api/users/{user_id}/`
-* **Create Resume:** `POST /api/resumes/`
-* **Update Resume:** `PUT /api/resumes/{resume_id}/`
-* **Delete Resume:** `DELETE /api/resumes/{resume_id}/`
-* **Get All Resumes:** `GET /api/resumes/`
-* **Get Resume by ID:** `GET /api/resumes/{resume_id}/`
+* **Get User by ID:** `GET /api/auth/user/`
+* **Update User:** `PUT /api/auth/user/`
+    * Body: `{ "first_name": "John1", "last_name": "Doe", "email": "john1.doe@example.com"}`
+* **Create Resume:** `POST /api/resume/`
+    * Body: `{
+                "title": "Software Engineer 2",
+                "template": "template_1",
+                "personal": {
+                    "name": "John",
+                    "email": "test2.doe@example.com",
+                    "phone": "123-456-7890"
+                },
+                "education": [
+                    {
+                        "institution": "XYZ University",
+                        "degree": "Bachelor of Science",
+                        "graduation_date": "2022-05-01"
+                    }
+                ],
+                "experience": [
+                    {
+                        "company": "ABC Corp",
+                        "position": "Software Engineer",
+                        "start_date": "2022-06-01",
+                        "end_date": "2023-06-01"
+                    }
+                ],
+                "skills": [
+                    "Python",
+                    "Django",
+                    "JavaScript"
+                ],
+                "projects": [
+                    {
+                        "name": "Project A",
+                        "description": "Developed a web application."
+                    }
+                ],
+                "achivements": [
+                    {
+                        "title": "Top Performer",
+                        "date": "2023-01-01"
+                    }
+                ]
+          }`
+* **Update Resume:** `PUT /api/resume/{resume_id}/`
+    * Body : `{
+                    "personal": {
+                        "name": "Johny2",
+                        "email": "john.doe@example.com",
+                        "phone": "123-456-7890"
+                    }
+                }`
+* **Delete Resume:** `DELETE /api/resume/{resume_id}/`
+* **Get All Resumes:** `GET /api/resume/all`
+* **Get Resume by ID:** `GET /api/resume/{resume_id}/`
 
 ### Docker Deployment
 
